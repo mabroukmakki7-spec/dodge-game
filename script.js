@@ -12,6 +12,7 @@ let player = {
 let blocks = [];
 let gameOver = false;
 let score = 0;
+let bestScore = localStorage.getItem("bestScore") || 0;
 let spawnInterval = 800;
 let spawnTimer = null;
 let difficultyTimer = null;
@@ -99,6 +100,10 @@ function update() {
     for (let b of blocks) {
         if (isColliding(player, b)) {
             gameOver = true;
+            if (score > bestScore) {
+    bestScore = score;
+    localStorage.setItem("bestScore", bestScore);
+}
             break;
         }
     }
@@ -123,6 +128,8 @@ function draw() {
     ctx.fillStyle = "#fff";
     ctx.font = "18px Arial";
     ctx.fillText("Score: " + score, 10, 24);
+    ctx.fillText("Best: " + bestScore, 10, 48);
+
 }
 
 function drawGameOver() {
@@ -151,3 +158,4 @@ canvas.addEventListener("click", () => {
 
 // initial call
 update();
+
