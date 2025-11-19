@@ -81,6 +81,19 @@ startSpawning();
 let keys = {};
 document.addEventListener("keydown", (e) => keys[e.key] = true);
 document.addEventListener("keyup", (e) => keys[e.key] = false);
+// Touch buttons
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+
+let moveLeft = false;
+let moveRight = false;
+
+leftBtn.addEventListener("touchstart", () => moveLeft = true);
+leftBtn.addEventListener("touchend", () => moveLeft = false);
+
+rightBtn.addEventListener("touchstart", () => moveRight = true);
+rightBtn.addEventListener("touchend", () => moveRight = false);
+
 
 function update() {
     if (gameOver) {
@@ -89,9 +102,11 @@ function update() {
     }
 
     // move player
-    if ((keys["ArrowLeft"] || keys["a"]) && player.x > 0) player.x -= player.speed;
-    if ((keys["ArrowRight"] || keys["d"]) && player.x < canvas.width - player.width)
-        player.x += player.speed;
+    if ((keys["ArrowLeft"] || keys["a"] || moveLeft) && player.x > 0)
+    player.x -= player.speed;
+
+if ((keys["ArrowRight"] || keys["d"] || moveRight) && player.x < canvas.width - player.width)
+    player.x += player.speed;
 
     // update blocks
     blocks.forEach(b => b.y += b.speed);
@@ -158,4 +173,5 @@ canvas.addEventListener("click", () => {
 
 // initial call
 update();
+
 
