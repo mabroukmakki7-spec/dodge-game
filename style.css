@@ -10,3 +10,24 @@ canvas {
     margin-top: 20px;
     border: 2px solid #fff;
 }
+#controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+#controls button {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+    border-radius: 50%;
+    border: none;
+    background: #444;
+    color: white;
+    box-shadow: 0 0 10px black;
+}
+
+
